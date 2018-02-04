@@ -31,4 +31,4 @@ This module creates following AWS resources:
 Example
 -------
 
-* [Simple example](https://github.com/timotapanainen/terraform-aws-ecs-service/tree/master/example)
+* [Simple example](https://github.com/tieto-cem/terraform-aws-ecs-service/tree/master/example)
