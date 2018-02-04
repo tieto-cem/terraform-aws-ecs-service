@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/tieto-cem/terraform-aws-ecs-task-definition.svg?style=shield&circle-token=549ec46ff06d26b4c86715e054bc03ac7f152533)](https://circleci.com/gh/tieto-cem/terraform-aws-ecs-task-definition)
+[![CircleCI](https://circleci.com/gh/tieto-cem/terraform-aws-ecs-service.svg?style=shield&circle-token=25a95fd9f688376110509611a19a6e64c58548b8)](https://circleci.com/gh/tieto-cem/terraform-aws-ecs-service)
 
 AWS ECS Service Terraform module
 ===========================================
