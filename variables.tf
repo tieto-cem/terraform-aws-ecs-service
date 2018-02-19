@@ -11,8 +11,17 @@ variable "launch_type" {
   default     = "EC2"
 }
 
-variable "task_definition_arn" {
-  description = "The family and revision (family:revision) or full ARN of the task definition that you want to run in your service."
+variable "task_definition_family" {
+  description = "The family of the Task Definition."
+}
+
+variable "task_definition_revision" {
+  description = "The revision of the task in a particular family."
+}
+
+variable "task_definition_use_latest" {
+  description = "Whether to make service point to specified task definition revision even if there is newer revision or make service to use latest revision"
+  default = true
 }
 
 variable "desired_count" {

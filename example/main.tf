@@ -28,8 +28,8 @@ module "instance_sg" {
 }
 
 module "container_instances" {
-  source                = "github.com/tieto-cem/terraform-aws-ecs-container-instance?ref=v0.1.2"
-  name_prefix           = "test-cluster"
+  source                = "github.com/tieto-cem/terraform-aws-ecs-container-instance?ref=v0.1.6"
+  name                  = "test-cluster"
   ecs_cluster_name      = "${aws_ecs_cluster.ecs_cluster.name}"
   lc_instance_type      = "t2.nano"
   lc_security_group_ids = ["${module.instance_sg.id}"]
@@ -41,10 +41,10 @@ module "container_instances" {
 #----------------------
 
 module "container_definition" {
-  source         = "github.com/tieto-cem/terraform-aws-ecs-task-definition//modules/container-definition?ref=v0.1.1"
+  source         = "github.com/tieto-cem/terraform-aws-ecs-task-definition//modules/container-definition?ref=v0.1.3"
   name           = "hello-world"
   image          = "tutum/hello-world"
-  mem_soft_limit = 256
+  mem_soft_limit = 512
   port_mappings  = [{
     containerPort = 80
     hostPort      = 80
@@ -52,7 +52,7 @@ module "container_definition" {
 }
 
 module "task_definition" {
-  source                = "github.com/tieto-cem/terraform-aws-ecs-task-definition?ref=v0.1.1"
+  source                = "github.com/tieto-cem/terraform-aws-ecs-task-definition?ref=v0.1.3"
   name                  = "mytask"
   container_definitions = ["${module.container_definition.json}"]
 }
@@ -63,10 +63,11 @@ module "task_definition" {
 #-------------------
 
 module "service" {
-  source              = ".."
-  name                = "myservice"
-  cluster_name        = "${aws_ecs_cluster.ecs_cluster.name}"
-  task_definition_arn = "${module.task_definition.arn}"
+  source                   = ".."
+  name                     = "myservice"
+  cluster_name             = "${aws_ecs_cluster.ecs_cluster.name}"
+  task_definition_family   = "${module.task_definition.family}"
+  task_definition_revision = "${module.task_definition.revision}"
 }
 
 #------------------------------------
