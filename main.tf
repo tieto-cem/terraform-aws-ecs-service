@@ -76,4 +76,8 @@ resource "aws_ecs_service" "ecs_service_with_lb" {
     field = "${var.placement_strategy_field}"
   }
 
+  # Don’t interfere with autoscaling
+  lifecycle {
+    ignore_changes = ["desired_count"]
+  }
 }
